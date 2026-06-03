@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { resolve, join } from 'path';
+import { resolve } from 'path';
 import { existsSync } from 'fs';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
+import { AiModule } from './ai/ai.module';
 
 // Resolve .env file path - try multiple locations
 const getEnvPath = (): string => {
@@ -71,6 +72,7 @@ if (!existsSync(envPath)) {
       inject: [ConfigService],
     }),
     UsersModule,
+    AiModule,
   ],
   controllers: [AppController],
   providers: [AppService],
